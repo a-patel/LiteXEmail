@@ -24,7 +24,7 @@ Run the nuget command for installing the client as,
 **AppSettings**
 ```json
 {
-  /*LiteX Smtp settings*/
+  /* LiteX Smtp settings */
   "SmtpConfig": {
     "Email": "--- REPLACE WITH YOUR Email ---",
     "DisplayName": "--- REPLACE WITH YOUR DisplayName ---",
@@ -36,7 +36,7 @@ Run the nuget command for installing the client as,
     "UseDefaultCredentials": "--- REPLACE WITH YOUR UseDefaultCredentials (boolean) ---"
   },
 
-  /*LiteX SendGrid settings*/
+  // LiteX SendGrid settings
   "SendGridConfig": {
     "SendGridApiKey": "--- REPLACE WITH YOUR SendGridApiKey ---"
   },
