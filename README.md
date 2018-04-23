@@ -24,7 +24,7 @@ Run the nuget command for installing the client as,
 **AppSettings**
 ```json
 {
-  /* LiteX Smtp settings */
+  //LiteX Smtp settings
   "SmtpConfig": {
     "Email": "--- REPLACE WITH YOUR Email ---",
     "DisplayName": "--- REPLACE WITH YOUR DisplayName ---",
@@ -36,12 +36,12 @@ Run the nuget command for installing the client as,
     "UseDefaultCredentials": "--- REPLACE WITH YOUR UseDefaultCredentials (boolean) ---"
   },
 
-  // LiteX SendGrid settings
+  //LiteX SendGrid settings
   "SendGridConfig": {
     "SendGridApiKey": "--- REPLACE WITH YOUR SendGridApiKey ---"
   },
 
-  /*LiteX MailKit settings*/
+  //LiteX MailKit settings
   "MailKitConfig": {
     "Email": "--- REPLACE WITH YOUR Email ---",
     "DisplayName": "--- REPLACE WITH YOUR DisplayName ---",
@@ -53,23 +53,23 @@ Run the nuget command for installing the client as,
     "UseDefaultCredentials": "--- REPLACE WITH YOUR UseDefaultCredentials (boolean) ---"
   },
 
-  /*LiteX AmazonSES settings*/
+  //LiteX AmazonSES settings
   "AmazonSESConfig": {
     "AmazonSESAccessKey": "--- REPLACE WITH YOUR AmazonSESAccessKey ---",
     "AmazonSESSecretKey": "--- REPLACE WITH YOUR AmazonSESSecretKey ---"
   },
 
-  /*LiteX MailChimp settings*/
+  //LiteX MailChimp settings
   "MailChimpConfig": {
     "MailChimpApiKey": "--- REPLACE WITH YOUR MailChimpApiKey ---"
   },
 
-  /*LiteX Mailgun settings*/
+  //LiteX Mailgun settings
   "MailgunConfig": {
     "MailgunApiKey": "--- REPLACE WITH YOUR MailgunApiKey ---"
   },
 
-  /*LiteX SendinBlue settings*/
+  //LiteX SendinBlue settings
   "SendinBlueConfig": {
     "SendinBlueApiKey": "--- REPLACE WITH YOUR  ---"
   }
