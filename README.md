@@ -95,41 +95,49 @@ public class Startup
 
         #region LiteX Email (SMTP)
 
-        // add smtp config settings
-        services.AddSingleton(configuration.GetSection("SmtpConfig").Get<SmtpConfig>());
+        services.AddLiteXEmail(configuration);
 
-        // register smtp email sender service
-        services.AddTransient<IEmailSender, EmailSender>();
+        // OR
+        // load configuration settings on your own.
+        // from appsettings, database, hardcoded etc.
+        var smtpConfig = new SmtpConfig();
+        services.AddLiteXEmail(configuration, smtpConfig);
 
         #endregion
 
         #region LiteX Email (SendGrid)
 
-        // add send grid config settings
-        services.AddSingleton(configuration.GetSection("SendGridConfig").Get<SendGridConfig>());
+        services.AddLiteXSendGridEmail(configuration);
 
-        // register send grid email sender service
-        services.AddTransient<IEmailSender, SendGridEmailSender>();
+        // OR
+        // load configuration settings on your own.
+        // from appsettings, database, hardcoded etc.
+        var sendGridConfig = new SendGridConfig();
+        services.AddLiteXSendGridEmail(configuration, sendGridConfig);
 
         #endregion
 
         #region LiteX Email (MailKit)
 
-        // add MailKit config settings
-        services.AddSingleton(configuration.GetSection("MailKitConfig").Get<MailKitConfig>());
+        services.AddLiteXMailKitEmail(configuration);
 
-        // register MailKit email sender service
-        services.AddTransient<IEmailSender, MailKitEmailSender>();
+        // OR
+        // load configuration settings on your own.
+        // from appsettings, database, hardcoded etc.
+        var mailKitConfig = new MailKitConfig();
+        services.AddLiteXMailKitEmail(configuration, mailKitConfig);
 
         #endregion
 
         #region LiteX Email (AmazonSES)
 
-        // add AmazonSES config settings
-        services.AddSingleton(configuration.GetSection("AmazonSESConfig").Get<AmazonSESConfig>());
+        services.AddLiteXAmazonSESEmail(configuration);
 
-        // register AmazonSES email sender service
-        services.AddTransient<IEmailSender, AmazonSESEmailSender>();
+        // OR
+        // load configuration settings on your own.
+        // from appsettings, database, hardcoded etc.
+        var amazonSESConfig = new AmazonSESConfig();
+        services.AddLiteXAmazonSESEmail(configuration, amazonSESConfig);
 
         #endregion
 
