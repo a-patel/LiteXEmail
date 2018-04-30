@@ -4,7 +4,7 @@ Abstract interface to implement any kind of basic email message services (e.g. S
 
 ## Add a dependency
 
-### nuget
+### Nuget
 
 Run the nuget command for installing the client as,
 `Install-Package LiteX.Email`
@@ -17,12 +17,10 @@ Run the nuget command for installing the client as,
 `Install-Package LiteX.Email.SendinBlue`
 
 
-## Usage
-
-### Configuration
+## Configuration
 
 **AppSettings**
-```json
+```js
 {
   //LiteX Smtp settings
   "SmtpConfig": {
@@ -180,6 +178,110 @@ public class Startup
     }
 }
 ```
+
+
+## Usage
+
+**Controller or Business layer**
+```cs
+/// <summary>
+/// Customer controller
+/// </summary>
+public class CustomerController : Controller
+{
+    #region Fields
+    
+    private readonly IEmailSender _emailSender;
+
+    #endregion
+
+    #region Ctor
+
+    /// <summary>
+    /// Ctor
+    /// </summary>
+    /// <param name="emailSender"></param>
+    public CustomerController(IEmailSender emailSender)
+    {
+        _emailSender = emailSender;
+    }
+
+    #endregion
+
+    #region Methods
+
+    /// <summary>
+    /// Send email to customer
+    /// </summary>
+    /// <param name="customer"></param>
+    /// <returns></returns>
+    public IActionResult SendEmailToCustomer(Customer customer)
+    {
+        try
+        {
+            string subject = "Welcome!",
+            body = "Welcome to our website!",
+            fromAddress = "from@example.com",
+            fromName = "Yousite",
+            toAddress = customer.Email,
+            toName = customer.FirstName,
+            replyToAddress = "reply@example.com",
+            replyToName = "Yousite";
+
+            IEnumerable<string> bcc = new List<string>() { "bcc@example.com" };
+            IEnumerable<string> cc = new List<string>() { "cc@example.com" };
+            //IEnumerable<Attachment> attachments = new List<Attachment>();
+
+            var isSent = _emailSender.SendEmail(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc);
+        }
+        catch (Exception ex)
+        {
+
+            return BadRequest(ex);
+        }
+        return Ok();
+    }
+
+    #endregion
+
+    #region Utilities
+
+    private IList<Customer> GetCustomers()
+    {
+        IList<Customer> customers = new List<Customer>();
+
+        customers.Add(new Customer() { Id = 1, Username = "ashish", Email = "toaashishpatel@outlook.com" });
+
+        return customers;
+    }
+
+    private Customer GetCustomerById(int id)
+    {
+        Customer customer = null;
+
+        customer = GetCustomers().ToList().FirstOrDefault(x => x.Id == id);
+
+        return customer;
+    }
+
+    public static byte[] StreamToByteArray(Stream input)
+    {
+        byte[] buffer = new byte[16 * 1024];
+        using (MemoryStream ms = new MemoryStream())
+        {
+            int read;
+            while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+            {
+                ms.Write(buffer, 0, read);
+            }
+            return ms.ToArray();
+        }
+    }
+
+    #endregion
+}
+```
+
 
 ### Coming soon
 
