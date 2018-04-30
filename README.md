@@ -139,7 +139,7 @@ public class Startup
 
         #endregion
 
-        #region LiteX Email (MailChimp) - NOT IMPLEMENTED
+        #region LiteX Email (MailChimp) - COMING SOON
 
         //// add MailChimp config settings
         //services.AddSingleton(configuration.GetSection("MailChimpConfig").Get<MailChimpConfig>());
@@ -149,7 +149,7 @@ public class Startup
 
         #endregion
 
-        #region LiteX Email (Mailgun) - NOT IMPLEMENTED
+        #region LiteX Email (Mailgun) - COMING SOON
 
         //// add Mailgun config settings
         //services.AddSingleton(configuration.GetSection("MailgunConfig").Get<MailgunConfig>());
@@ -159,7 +159,7 @@ public class Startup
 
         #endregion
 
-        #region LiteX Email (SendinBlue) - NOT IMPLEMENTED
+        #region LiteX Email (SendinBlue) - COMING SOON
 
         //// add SendinBlue config settings
         //services.AddSingleton(configuration.GetSection("SendinBlueConfig").Get<SendinBlueConfig>());
