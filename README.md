@@ -7,14 +7,14 @@ Abstract interface to implement any kind of basic email message services (e.g. S
 ### Nuget
 
 Run the nuget command for installing the client as,
-`Install-Package LiteX.Email`
-`Install-Package LiteX.Email.Core`
-`Install-Package LiteX.Email.SendGrid`
-`Install-Package LiteX.Email.MailKit`
-`Install-Package LiteX.Email.AmazonSES`
-`Install-Package LiteX.Email.MailChimp`
-`Install-Package LiteX.Email.Mailgun`
-`Install-Package LiteX.Email.SendinBlue`
+* `Install-Package LiteX.Email`
+* `Install-Package LiteX.Email.Core`
+* `Install-Package LiteX.Email.SendGrid`
+* `Install-Package LiteX.Email.MailKit`
+* `Install-Package LiteX.Email.AmazonSES`
+* `Install-Package LiteX.Email.Mailgun` //COMING SOON
+* `Install-Package LiteX.Email.MailChimp` //COMING SOON
+* `Install-Package LiteX.Email.SendinBlue` //COMING SOON
 
 
 ## Configuration
