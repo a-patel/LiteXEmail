@@ -78,13 +78,6 @@ Run the nuget command for installing the client as,
 ```cs
 public class Startup
 {
-    public IConfiguration configuration { get; }
-
-    public Startup(IConfiguration configuration)
-    {
-        this.configuration = configuration;
-    }
-
     public void ConfigureServices(IServiceCollection services)
     {
         #region LiteX Email
@@ -93,88 +86,113 @@ public class Startup
 
         #region LiteX Email (SMTP)
 
-        services.AddLiteXEmail(configuration);
+        // 1. Use default configuration from appsettings.json's 'SmtpConfig'
+        services.AddLiteXEmail();
 
-        // OR
-        // load configuration settings on your own.
-        // from appsettings, database, hardcoded etc.
+        //OR
+        // 2. Load configuration settings using options.
+        services.AddLiteXEmail(option =>
+        {
+            //option. = "";
+        });
+
+        //OR
+        // 3. Load configuration settings on your own.
+        // (e.g. appsettings, database, hardcoded)
         var smtpConfig = new SmtpConfig();
-        services.AddLiteXEmail(configuration, smtpConfig);
+        services.AddLiteXEmail(smtpConfig);
 
         #endregion
 
         #region LiteX Email (SendGrid)
 
-        services.AddLiteXSendGridEmail(configuration);
+        // 1. Use default configuration from appsettings.json's 'SendGridConfig'
+        services.AddLiteXSendGridEmail();
 
-        // OR
-        // load configuration settings on your own.
-        // from appsettings, database, hardcoded etc.
+        //OR
+        // 2. Load configuration settings using options.
+        services.AddLiteXSendGridEmail(option =>
+        {
+            //option. = "";
+        });
+
+        //OR
+        // 3. Load configuration settings on your own.
+        // (e.g. appsettings, database, hardcoded)
         var sendGridConfig = new SendGridConfig();
-        services.AddLiteXSendGridEmail(configuration, sendGridConfig);
+        services.AddLiteXSendGridEmail(sendGridConfig);
 
         #endregion
 
         #region LiteX Email (MailKit)
 
-        services.AddLiteXMailKitEmail(configuration);
+        // 1. Use default configuration from appsettings.json's 'MailKitConfig'
+        services.AddLiteXMailKitEmail();
 
-        // OR
-        // load configuration settings on your own.
-        // from appsettings, database, hardcoded etc.
+        //OR
+        // 2. Load configuration settings using options.
+        services.AddLiteXMailKitEmail(option =>
+        {
+            //option. = "";
+        });
+
+        //OR
+        // 3. Load configuration settings on your own.
+        // (e.g. appsettings, database, hardcoded)
         var mailKitConfig = new MailKitConfig();
-        services.AddLiteXMailKitEmail(configuration, mailKitConfig);
+        services.AddLiteXMailKitEmail(mailKitConfig);
 
         #endregion
 
         #region LiteX Email (AmazonSES)
 
-        services.AddLiteXAmazonSESEmail(configuration);
+        // 1. Use default configuration from appsettings.json's 'AmazonSESConfig'
+        services.AddLiteXAmazonSESEmail();
 
-        // OR
-        // load configuration settings on your own.
-        // from appsettings, database, hardcoded etc.
+        //OR
+        // 2. Load configuration settings using options.
+        services.AddLiteXAmazonSESEmail(option =>
+        {
+            //option. = "";
+        });
+
+        //OR
+        // 3. Load configuration settings on your own.
+        // (e.g. appsettings, database, hardcoded)
         var amazonSESConfig = new AmazonSESConfig();
-        services.AddLiteXAmazonSESEmail(configuration, amazonSESConfig);
+        services.AddLiteXAmazonSESEmail(amazonSESConfig);
 
         #endregion
 
-        #region LiteX Email (MailChimp) - COMING SOON
+        #region LiteX Email (Mailgun)
 
-        //// add MailChimp config settings
-        //services.AddSingleton(configuration.GetSection("MailChimpConfig").Get<MailChimpConfig>());
+        // 1. Use default configuration from appsettings.json's 'MailgunConfig'
+        services.AddLiteXMailgunEmail();
 
-        //// register MailChimp email sender service
-        //services.AddTransient<IEmailSender, MailChimpEmailSender>();
+        //OR
+        // 2. Load configuration settings using options.
+        services.AddLiteXMailgunEmail(option =>
+        {
+            //option. = "";
+        });
+
+        //OR
+        // 3. Load configuration settings on your own.
+        // (e.g. appsettings, database, hardcoded)
+        var mailgunConfig = new MailgunConfig();
+        services.AddLiteXMailgunEmail(mailgunConfig);
 
         #endregion
 
-        #region LiteX Email (Mailgun) - COMING SOON
-
-        //// add Mailgun config settings
-        //services.AddSingleton(configuration.GetSection("MailgunConfig").Get<MailgunConfig>());
-
-        //// register Mailgun email sender service
-        //services.AddTransient<IEmailSender, MailgunEmailSender>();
+        #region LiteX Email (MailChimp) - Coming Soon
 
         #endregion
 
-        #region LiteX Email (SendinBlue) - COMING SOON
-
-        //// add SendinBlue config settings
-        //services.AddSingleton(configuration.GetSection("SendinBlueConfig").Get<SendinBlueConfig>());
-
-        //// register SendinBlue email sender service
-        //services.AddTransient<IEmailSender, SendinBlueEmailSender>();
+        #region LiteX Email (SendinBlue) - Coming Soon
 
         #endregion
 
         #endregion
-    }
-
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-    {
-
     }
 }
 ```
