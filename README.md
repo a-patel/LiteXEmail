@@ -299,8 +299,3 @@ public class CustomerController : Controller
     #endregion
 }
 ```
-
-
-### Coming soon
-
-Attachment
