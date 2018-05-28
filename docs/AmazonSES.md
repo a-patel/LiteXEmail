@@ -30,72 +30,6 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        #region LiteX Email
-
-        // Email Message (use one of below)
-
-        #region LiteX Email (SMTP)
-
-        // 1. Use default configuration from appsettings.json's 'SmtpConfig'
-        services.AddLiteXEmail();
-
-        //OR
-        // 2. Load configuration settings using options.
-        services.AddLiteXEmail(option =>
-        {
-            //option. = "";
-        });
-
-        //OR
-        // 3. Load configuration settings on your own.
-        // (e.g. appsettings, database, hardcoded)
-        var smtpConfig = new SmtpConfig();
-        services.AddLiteXEmail(smtpConfig);
-
-        #endregion
-
-        #region LiteX Email (SendGrid)
-
-        // 1. Use default configuration from appsettings.json's 'SendGridConfig'
-        services.AddLiteXSendGridEmail();
-
-        //OR
-        // 2. Load configuration settings using options.
-        services.AddLiteXSendGridEmail(option =>
-        {
-            //option. = "";
-        });
-
-        //OR
-        // 3. Load configuration settings on your own.
-        // (e.g. appsettings, database, hardcoded)
-        var sendGridConfig = new SendGridConfig();
-        services.AddLiteXSendGridEmail(sendGridConfig);
-
-        #endregion
-
-        #region LiteX Email (MailKit)
-
-        // 1. Use default configuration from appsettings.json's 'MailKitConfig'
-        services.AddLiteXMailKitEmail();
-
-        //OR
-        // 2. Load configuration settings using options.
-        services.AddLiteXMailKitEmail(option =>
-        {
-            //option. = "";
-        });
-
-        //OR
-        // 3. Load configuration settings on your own.
-        // (e.g. appsettings, database, hardcoded)
-        var mailKitConfig = new MailKitConfig();
-        services.AddLiteXMailKitEmail(mailKitConfig);
-
-        #endregion
-
-        #region LiteX Email (AmazonSES)
-
         // 1. Use default configuration from appsettings.json's 'AmazonSESConfig'
         services.AddLiteXAmazonSESEmail();
 
@@ -111,38 +45,6 @@ public class Startup
         // (e.g. appsettings, database, hardcoded)
         var amazonSESConfig = new AmazonSESConfig();
         services.AddLiteXAmazonSESEmail(amazonSESConfig);
-
-        #endregion
-
-        #region LiteX Email (Mailgun)
-
-        // 1. Use default configuration from appsettings.json's 'MailgunConfig'
-        services.AddLiteXMailgunEmail();
-
-        //OR
-        // 2. Load configuration settings using options.
-        services.AddLiteXMailgunEmail(option =>
-        {
-            //option. = "";
-        });
-
-        //OR
-        // 3. Load configuration settings on your own.
-        // (e.g. appsettings, database, hardcoded)
-        var mailgunConfig = new MailgunConfig();
-        services.AddLiteXMailgunEmail(mailgunConfig);
-
-        #endregion
-
-        #region LiteX Email (MailChimp) - Coming Soon
-
-        #endregion
-
-        #region LiteX Email (SendinBlue) - Coming Soon
-
-        #endregion
-
-        #endregion
     }
 }
 ```
