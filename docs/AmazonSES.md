@@ -150,7 +150,7 @@ public class CustomerController : Controller
     {
         IList<Customer> customers = new List<Customer>();
 
-        customers.Add(new Customer() { Id = 1, Username = "ashish", Email = "toaashishpatel@outlook.com" });
+        customers.Add(new Customer() { Id = 1, Username = "ashish", Email = "abc@outlook.com" });
 
         return customers;
     }
