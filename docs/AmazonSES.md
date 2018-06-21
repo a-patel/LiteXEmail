@@ -19,7 +19,8 @@ Run the nuget command for installing the client as,
   //LiteX AmazonSES settings
   "AmazonSESConfig": {
     "AmazonSESAccessKey": "--- REPLACE WITH YOUR AmazonSESAccessKey ---",
-    "AmazonSESSecretKey": "--- REPLACE WITH YOUR AmazonSESSecretKey ---"
+    "AmazonSESSecretKey": "--- REPLACE WITH YOUR AmazonSESSecretKey ---",
+    "AmazonRegion": "--- REPLACE WITH YOUR AmazonRegion ---"
   }
 }
 ```
@@ -41,6 +42,7 @@ public class Startup
         {
             option.AmazonSESAccessKey = "";
             option.AmazonSESSecretKey = "";
+            option.AmazonRegion = "";
         });
 
         //OR
@@ -49,7 +51,8 @@ public class Startup
         var amazonSESConfig = new AmazonSESConfig()
         {
             AmazonSESAccessKey = "",
-            AmazonSESSecretKey = ""
+            AmazonSESSecretKey = "",
+            AmazonRegion = ""
         };
         services.AddLiteXAmazonSESEmail(amazonSESConfig);
 
