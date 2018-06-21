@@ -1,5 +1,5 @@
 # LiteXEmail
-Abstract interface to implement any kind of basic email message services (e.g. SMTP, SendGrid, MailKit, Mailgun, MailChimp, AmazonSES, SendinBlue)
+Abstract interface to implement any kind of basic email message services (e.g. SMTP, SendGrid, MailKit, AmazonSES, Mailgun, MailChimp, MailJet, ElasticEmail, SendinBlue)
 
 
 ## Add a dependency
@@ -29,28 +29,16 @@ Run the nuget command for installing the client as,
     "Email": "--- REPLACE WITH YOUR Email ---",
     "DisplayName": "--- REPLACE WITH YOUR DisplayName ---",
     "Host": "--- REPLACE WITH Host Host ---",
-    "Port": "--- REPLACE WITH YOUR Port (int) ---",
+    "Port": 587, //"--- REPLACE WITH YOUR Port (int) ---",
     "Username": "--- REPLACE WITH YOUR Username ---",
     "Password": "--- REPLACE WITH YOUR Password ---",
-    "EnableSsl": "--- REPLACE WITH YOUR EnableSsl (boolean) ---",
-    "UseDefaultCredentials": "--- REPLACE WITH YOUR UseDefaultCredentials (boolean) ---"
+    "EnableSsl": true, //"--- REPLACE WITH YOUR EnableSsl (boolean) ---",
+    "UseDefaultCredentials": false //"--- REPLACE WITH YOUR UseDefaultCredentials (boolean) ---"
   },
 
   //LiteX SendGrid settings
   "SendGridConfig": {
     "SendGridApiKey": "--- REPLACE WITH YOUR SendGridApiKey ---"
-  },
-
-  //LiteX MailKit settings
-  "MailKitConfig": {
-    "Email": "--- REPLACE WITH YOUR Email ---",
-    "DisplayName": "--- REPLACE WITH YOUR DisplayName ---",
-    "Host": "--- REPLACE WITH Host Host ---",
-    "Port": "--- REPLACE WITH YOUR Port (int) ---",
-    "Username": "--- REPLACE WITH YOUR Username ---",
-    "Password": "--- REPLACE WITH YOUR Password ---",
-    "EnableSsl": "--- REPLACE WITH YOUR EnableSsl (boolean) ---",
-    "UseDefaultCredentials": "--- REPLACE WITH YOUR UseDefaultCredentials (boolean) ---"
   },
 
   //LiteX AmazonSES settings
@@ -59,14 +47,29 @@ Run the nuget command for installing the client as,
     "AmazonSESSecretKey": "--- REPLACE WITH YOUR AmazonSESSecretKey ---"
   },
 
-  //LiteX MailChimp settings
-  "MailChimpConfig": {
-    "MailChimpApiKey": "--- REPLACE WITH YOUR MailChimpApiKey ---"
+  //LiteX MailKit settings
+  "MailKitConfig": {
+    "Email": "--- REPLACE WITH YOUR Email ---",
+    "DisplayName": "--- REPLACE WITH YOUR DisplayName ---",
+    "Host": "--- REPLACE WITH Host Host ---",
+    "Port": 587, //"--- REPLACE WITH YOUR Port (int) ---",
+    "Username": "--- REPLACE WITH YOUR Username ---",
+    "Password": "--- REPLACE WITH YOUR Password ---",
+    "EnableSsl": false,
+    "UseDefaultCredentials": false
   },
 
   //LiteX Mailgun settings
   "MailgunConfig": {
-    "MailgunApiKey": "--- REPLACE WITH YOUR MailgunApiKey ---"
+    "MailgunApiKey": "api:key-fakeapikey",
+    "MailgunApiBaseUri": "https://api.mailgun.net/v3/",
+    "MailgunRequestUri": "fakesandbox.mailgun.org/messages",
+    "MailgunFrom": "postmaster@fakesandbox.mailgun.org"
+  },
+
+  //LiteX MailChimp settings
+  "MailChimpConfig": {
+    "MailChimpApiKey": "--- REPLACE WITH YOUR MailChimpApiKey ---"
   },
 
   //LiteX SendinBlue settings
@@ -95,13 +98,30 @@ public class Startup
         // 2. Load configuration settings using options.
         services.AddLiteXEmail(option =>
         {
-            //option. = "";
+            option.Host = "";
+            option.Username = "";
+            option.Password = "";
+            option.Port = 443;
+            option.Email = "";
+            option.EnableSsl = true;
+            option.UseDefaultCredentials = true;
+            option.DisplayName = "";
         });
 
         //OR
         // 3. Load configuration settings on your own.
         // (e.g. appsettings, database, hardcoded)
-        var smtpConfig = new SmtpConfig();
+        var smtpConfig = new SmtpConfig()
+        {
+            Host = "",
+            Username = "",
+            Password = "",
+            Port = 443,
+            Email = "",
+            EnableSsl = true,
+            UseDefaultCredentials = true,
+            DisplayName = ""
+        };
         services.AddLiteXEmail(smtpConfig);
 
         #endregion
@@ -115,13 +135,16 @@ public class Startup
         // 2. Load configuration settings using options.
         services.AddLiteXSendGridEmail(option =>
         {
-            //option. = "";
+            option.SendGridApiKey = "";
         });
 
         //OR
         // 3. Load configuration settings on your own.
         // (e.g. appsettings, database, hardcoded)
-        var sendGridConfig = new SendGridConfig();
+        var sendGridConfig = new SendGridConfig()
+        {
+            SendGridApiKey = ""
+        };
         services.AddLiteXSendGridEmail(sendGridConfig);
 
         #endregion
@@ -135,13 +158,30 @@ public class Startup
         // 2. Load configuration settings using options.
         services.AddLiteXMailKitEmail(option =>
         {
-            //option. = "";
+            option.Host = "";
+            option.Username = "";
+            option.Password = "";
+            option.Port = 443;
+            option.Email = "";
+            option.EnableSsl = true;
+            option.UseDefaultCredentials = true;
+            option.DisplayName = "";
         });
 
         //OR
         // 3. Load configuration settings on your own.
         // (e.g. appsettings, database, hardcoded)
-        var mailKitConfig = new MailKitConfig();
+        var mailKitConfig = new MailKitConfig()
+        {
+            Host = "",
+            Username = "",
+            Password = "",
+            Port = 443,
+            Email = "",
+            EnableSsl = true,
+            UseDefaultCredentials = true,
+            DisplayName = ""
+        };
         services.AddLiteXMailKitEmail(mailKitConfig);
 
         #endregion
@@ -155,13 +195,18 @@ public class Startup
         // 2. Load configuration settings using options.
         services.AddLiteXAmazonSESEmail(option =>
         {
-            //option. = "";
+            option.AmazonSESAccessKey = "";
+            option.AmazonSESSecretKey = "";
         });
 
         //OR
         // 3. Load configuration settings on your own.
         // (e.g. appsettings, database, hardcoded)
-        var amazonSESConfig = new AmazonSESConfig();
+        var amazonSESConfig = new AmazonSESConfig()
+        {
+            AmazonSESAccessKey = "",
+            AmazonSESSecretKey = ""
+        };
         services.AddLiteXAmazonSESEmail(amazonSESConfig);
 
         #endregion
@@ -175,14 +220,31 @@ public class Startup
         // 2. Load configuration settings using options.
         services.AddLiteXMailgunEmail(option =>
         {
-            //option. = "";
+            option.MailgunApiKey = "";
+            option.ApiBaseUri = "";
+            option.RequestUri = "";
+            option.From = "";
         });
 
         //OR
         // 3. Load configuration settings on your own.
         // (e.g. appsettings, database, hardcoded)
-        var mailgunConfig = new MailgunConfig();
+        var mailgunConfig = new MailgunConfig()
+        {
+            MailgunApiKey = "",
+            ApiBaseUri = "",
+            RequestUri = "",
+            From = ""
+        };
         services.AddLiteXMailgunEmail(mailgunConfig);
+
+        #endregion
+
+        #region LiteX Email (MailJet) - Coming Soon
+
+        #endregion
+
+        #region LiteX Email (ElasticEmail) - Coming Soon
 
         #endregion
 
@@ -207,10 +269,11 @@ public class Startup
 /// <summary>
 /// Customer controller
 /// </summary>
+[Route("api/[controller]")]
 public class CustomerController : Controller
 {
     #region Fields
-    
+
     private readonly IEmailSender _emailSender;
 
     #endregion
@@ -231,35 +294,55 @@ public class CustomerController : Controller
     #region Methods
 
     /// <summary>
+    /// Get Email Provider Type
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet]
+    [Route("get-email-provider-type")]
+    public IActionResult GetEmailProviderType()
+    {
+        return Ok(_emailSender.EmailProviderType.ToString());
+    }
+
+    /// <summary>
     /// Send email to customer
     /// </summary>
     /// <param name="customer"></param>
     /// <returns></returns>
+    [HttpPost]
+    [Route("send-email-to-customer")]
     public IActionResult SendEmailToCustomer(Customer customer)
     {
         try
         {
             string subject = "Welcome!",
-            body = "Welcome to our website!",
-            fromAddress = "from@example.com",
-            fromName = "Yousite",
-            toAddress = customer.Email,
-            toName = customer.FirstName,
-            replyToAddress = "reply@example.com",
-            replyToName = "Yousite";
+            body = "Welcome to LiteX!",
+            fromAddress = "acc.aashishpatel@gmail.com",
+            fromName = "LiteX",
+            toAddress = customer.Email ?? "patelashish_90@yahoo.com",
+            toName = customer.FirstName ?? "Aashish Patel",
+            replyToAddress = "aashish.mrcool@gmail.com",
+            replyToName = "Reply Name";
 
-            IEnumerable<string> bcc = new List<string>() { "bcc@example.com" };
-            IEnumerable<string> cc = new List<string>() { "cc@example.com" };
-            //IEnumerable<Attachment> attachments = new List<Attachment>();
+            IEnumerable<string> bcc = new List<string>() { "toaashishpatel@outlook.com" };
+            IEnumerable<string> cc = new List<string>() { "toaashishpatel@gmail.com" };
+            IEnumerable<Attachment> attachments = new List<Attachment>();
 
-            var isSent = _emailSender.SendEmail(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc);
+            _emailSender.SendEmail(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc, attachments);
+            //_emailSender.SendEmail(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc);
+
+
+            // async
+            //await _emailSender.SendEmailAsync(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc, attachments);
+
+
+            return Ok();
         }
         catch (Exception ex)
         {
 
             return BadRequest(ex);
         }
-        return Ok();
     }
 
     #endregion
@@ -284,20 +367,9 @@ public class CustomerController : Controller
         return customer;
     }
 
-    public static byte[] StreamToByteArray(Stream input)
-    {
-        byte[] buffer = new byte[16 * 1024];
-        using (MemoryStream ms = new MemoryStream())
-        {
-            int read;
-            while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
-            {
-                ms.Write(buffer, 0, read);
-            }
-            return ms.ToArray();
-        }
-    }
-
     #endregion
 }
 ```
+
+### Coming soon
+* Logging
