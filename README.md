@@ -317,15 +317,15 @@ public class CustomerController : Controller
         {
             string subject = "Welcome!",
             body = "Welcome to LiteX!",
-            fromAddress = "acc.aashishpatel@gmail.com",
+            fromAddress = "abc@gmail.com",
             fromName = "LiteX",
-            toAddress = customer.Email ?? "patelashish_90@yahoo.com",
+            toAddress = customer.Email ?? "abc@yahoo.com",
             toName = customer.FirstName ?? "Aashish Patel",
-            replyToAddress = "aashish.mrcool@gmail.com",
+            replyToAddress = "abc@gmail.com",
             replyToName = "Reply Name";
 
-            IEnumerable<string> bcc = new List<string>() { "toaashishpatel@outlook.com" };
-            IEnumerable<string> cc = new List<string>() { "toaashishpatel@gmail.com" };
+            IEnumerable<string> bcc = new List<string>() { "abc@outlook.com" };
+            IEnumerable<string> cc = new List<string>() { "abc@gmail.com" };
             IEnumerable<Attachment> attachments = new List<Attachment>();
 
             _emailSender.SendEmail(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc, attachments);
