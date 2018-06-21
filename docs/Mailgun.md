@@ -17,10 +17,10 @@ Run the nuget command for installing the client as,
 {
   //LiteX Mailgun settings
   "MailgunConfig": {
-    "MailgunApiKey": "api:key-fakeapikey",
-    "MailgunApiBaseUri": "https://api.mailgun.net/v3/",
-    "MailgunRequestUri": "fakesandbox.mailgun.org/messages",
-    "MailgunFrom": "postmaster@fakesandbox.mailgun.org"
+    "ApiKey": "api:key-fakeapikey",
+    "ApiBaseUri": "https://api.mailgun.net/v3/",
+    "RequestUri": "fakesandbox.mailgun.org/messages",
+    "From": "postmaster@fakesandbox.mailgun.org"
   }
 }
 ```
@@ -40,7 +40,7 @@ public class Startup
         // 2. Load configuration settings using options.
         services.AddLiteXMailgunEmail(option =>
         {
-            option.MailgunApiKey = "";
+            option.ApiKey = "";
             option.ApiBaseUri = "";
             option.RequestUri = "";
             option.From = "";
@@ -51,7 +51,7 @@ public class Startup
         // (e.g. appsettings, database, hardcoded)
         var mailgunConfig = new MailgunConfig()
         {
-            MailgunApiKey = "",
+            ApiKey = "",
             ApiBaseUri = "",
             RequestUri = "",
             From = ""
