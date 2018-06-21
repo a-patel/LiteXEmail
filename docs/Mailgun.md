@@ -1,6 +1,5 @@
-# LiteXEmail
-Abstract interface to implement any kind of basic email message services (e.g. SMTP, SendGrid, MailKit, Mailgun, MailChimp, AmazonSES, SendinBlue)
-
+# LiteX Email Mailgun
+LiteX.Email.Mailgun is a email message library which is based on LiteX.Email.Core and Mailgun.
 
 ## Add a dependency
 
@@ -18,7 +17,10 @@ Run the nuget command for installing the client as,
 {
   //LiteX Mailgun settings
   "MailgunConfig": {
-    "MailgunApiKey": "--- REPLACE WITH YOUR MailgunApiKey ---"
+    "MailgunApiKey": "api:key-fakeapikey",
+    "MailgunApiBaseUri": "https://api.mailgun.net/v3/",
+    "MailgunRequestUri": "fakesandbox.mailgun.org/messages",
+    "MailgunFrom": "postmaster@fakesandbox.mailgun.org"
   }
 }
 ```
@@ -29,6 +31,8 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
+        #region LiteX Email (Mailgun)
+
         // 1. Use default configuration from appsettings.json's 'MailgunConfig'
         services.AddLiteXMailgunEmail();
 
@@ -36,14 +40,25 @@ public class Startup
         // 2. Load configuration settings using options.
         services.AddLiteXMailgunEmail(option =>
         {
-            //option. = "";
+            option.MailgunApiKey = "";
+            option.ApiBaseUri = "";
+            option.RequestUri = "";
+            option.From = "";
         });
 
         //OR
         // 3. Load configuration settings on your own.
         // (e.g. appsettings, database, hardcoded)
-        var mailgunConfig = new MailgunConfig();
+        var mailgunConfig = new MailgunConfig()
+        {
+            MailgunApiKey = "",
+            ApiBaseUri = "",
+            RequestUri = "",
+            From = ""
+        };
         services.AddLiteXMailgunEmail(mailgunConfig);
+
+        #endregion
     }
 }
 ```
@@ -56,10 +71,11 @@ public class Startup
 /// <summary>
 /// Customer controller
 /// </summary>
+[Route("api/[controller]")]
 public class CustomerController : Controller
 {
     #region Fields
-    
+
     private readonly IEmailSender _emailSender;
 
     #endregion
@@ -80,35 +96,55 @@ public class CustomerController : Controller
     #region Methods
 
     /// <summary>
+    /// Get Email Provider Type
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet]
+    [Route("get-email-provider-type")]
+    public IActionResult GetEmailProviderType()
+    {
+        return Ok(_emailSender.EmailProviderType.ToString());
+    }
+
+    /// <summary>
     /// Send email to customer
     /// </summary>
     /// <param name="customer"></param>
     /// <returns></returns>
+    [HttpPost]
+    [Route("send-email-to-customer")]
     public IActionResult SendEmailToCustomer(Customer customer)
     {
         try
         {
             string subject = "Welcome!",
-            body = "Welcome to our website!",
-            fromAddress = "from@example.com",
-            fromName = "Yousite",
-            toAddress = customer.Email,
-            toName = customer.FirstName,
-            replyToAddress = "reply@example.com",
-            replyToName = "Yousite";
+            body = "Welcome to LiteX!",
+            fromAddress = "abc@gmail.com",
+            fromName = "LiteX",
+            toAddress = customer.Email ?? "abc@yahoo.com",
+            toName = customer.FirstName ?? "Aashish Patel",
+            replyToAddress = "abc@gmail.com",
+            replyToName = "Reply Name";
 
-            IEnumerable<string> bcc = new List<string>() { "bcc@example.com" };
-            IEnumerable<string> cc = new List<string>() { "cc@example.com" };
-            //IEnumerable<Attachment> attachments = new List<Attachment>();
+            IEnumerable<string> bcc = new List<string>() { "abc@outlook.com" };
+            IEnumerable<string> cc = new List<string>() { "abc@gmail.com" };
+            IEnumerable<Attachment> attachments = new List<Attachment>();
 
-            var isSent = _emailSender.SendEmail(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc);
+            _emailSender.SendEmail(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc, attachments);
+            //_emailSender.SendEmail(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc);
+
+
+            // async
+            //await _emailSender.SendEmailAsync(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc, attachments);
+
+
+            return Ok();
         }
         catch (Exception ex)
         {
 
             return BadRequest(ex);
         }
-        return Ok();
     }
 
     #endregion
@@ -119,7 +155,7 @@ public class CustomerController : Controller
     {
         IList<Customer> customers = new List<Customer>();
 
-        customers.Add(new Customer() { Id = 1, Username = "ashish", Email = "toaashishpatel@outlook.com" });
+        customers.Add(new Customer() { Id = 1, Username = "ashish", Email = "abc@outlook.com" });
 
         return customers;
     }
@@ -133,25 +169,9 @@ public class CustomerController : Controller
         return customer;
     }
 
-    public static byte[] StreamToByteArray(Stream input)
-    {
-        byte[] buffer = new byte[16 * 1024];
-        using (MemoryStream ms = new MemoryStream())
-        {
-            int read;
-            while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
-            {
-                ms.Write(buffer, 0, read);
-            }
-            return ms.ToArray();
-        }
-    }
-
     #endregion
 }
 ```
 
-
 ### Coming soon
-
-Attachment
+* Logging
