@@ -1,5 +1,20 @@
 # LiteXEmail
-Abstract interface to implement any kind of basic email message services (e.g. SMTP, SendGrid, MailKit, AmazonSES, Mailgun, MailChimp, MailJet, ElasticEmail, SendinBlue)
+> LiteXEmail is simple yet powerful and very high-performance sms mechanism and incorporating both synchronous and asynchronous usage with some advanced usages which can help us to handle sending email more easier!
+> Provide Email service for any type of application (.NET Core, .NET Standard).
+
+Very simple yet advanced configuration. Minimal (one line) code configuration is required.
+
+Abstract interface to implement any kind of basic email message services (e.g. SMTP, SendGrid, MailKit, Mailgun, MailChimp, AmazonSES, SendinBlue)
+      
+It supports various sms providers and implements many advanced features. You can also write your own and extend it also extend existing providers.
+
+Easily migrate or switch between one to another provider with no code breaking changes.
+
+Having a default/generic implementation to wrap the SMTP, SendGrid, MailKit, Mailgun, MailChimp, AmazonSES, SendinBlue and independed on the underlying provider SDK(s).
+
+The Core library contains all base interfaces and tools. One should install at least one other LiteXEmail package to get email handle implementations.
+
+This is the ASP.NET Core configuration integration package (Built-in).
 
 
 
