@@ -2,26 +2,53 @@
 Abstract interface to implement any kind of basic email message services (e.g. SMTP, SendGrid, MailKit, AmazonSES, Mailgun, MailChimp, MailJet, ElasticEmail, SendinBlue)
 
 
-## Add a dependency
 
-### Nuget
-
-Run the nuget command for installing the client as,
-* `Install-Package LiteX.Email`
-* `Install-Package LiteX.Email.Core`
-* `Install-Package LiteX.Email.SendGrid`
-* `Install-Package LiteX.Email.MailKit`
-* `Install-Package LiteX.Email.AmazonSES`
-* `Install-Package LiteX.Email.Mailgun`
-* `Install-Package LiteX.Email.MailChimp` //COMING SOON
-* `Install-Package LiteX.Email.SendinBlue` //COMING SOON
-* `Install-Package LiteX.Email.MailJet` //COMING SOON
-* `Install-Package LiteX.Email.ElasticEmail` //COMING SOON
+## Email Providers :books:
+- [Smtp](docs/Smtp.md)
+- [SendGrid](docs/SendGrid.md)
+- [AmazonSES](docs/AmazonSES.md)
+- [MailKit](docs/MailKit.md)
+- [Mailgun](docs/Mailgun.md)
+- [MailJet](docs/MailJet.md) - coming soon
+- [MailChimp](docs/MailChimp.md) - coming soon
+- [SendinBlue](docs/SendinBlue.md) - coming soon
+- [ElasticEmail](docs/ElasticEmail.md) - coming soon
 
 
-## Configuration
 
-**AppSettings**
+## Features :pager:
+- Attachement
+- ReplyTo
+- Cc, Bcc (multiple)
+- Async compatible
+- Thread safe, concurrency ready
+- Interface based API to support the test driven development and dependency injection
+- Leverages a provider model on top of ILiteXEmailSender under the hood and can be extended with your own implementation
+
+
+
+## Basic Usage :page_facing_up:
+
+
+### Step 1 : Install the package :package:
+
+> Choose one kinds of email provider type that you needs and install it via [Nuget](https://www.nuget.org/profiles/iamaashishpatel).
+> To install LiteXEmail, run the following command in the [Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console)
+
+```Powershell
+PM> Install-Package LiteX.Email
+PM> Install-Package LiteX.Email.SendGrid
+PM> Install-Package LiteX.Email.AmazonSES
+PM> Install-Package LiteX.Email.MailKit
+PM> Install-Package LiteX.Email.Mailgun
+```
+
+
+### Step 2 : Configuration 🔨 
+> Different types of email provider have their own way to config.
+> Here are samples that show you how to config.
+
+##### 2.1 : AppSettings 
 ```js
 {
   //LiteX Smtp settings
@@ -33,19 +60,22 @@ Run the nuget command for installing the client as,
     "Username": "--- REPLACE WITH YOUR Username ---",
     "Password": "--- REPLACE WITH YOUR Password ---",
     "EnableSsl": true, //"--- REPLACE WITH YOUR EnableSsl (boolean) ---",
-    "UseDefaultCredentials": false //"--- REPLACE WITH YOUR UseDefaultCredentials (boolean) ---"
+    "UseDefaultCredentials": false, //"--- REPLACE WITH YOUR UseDefaultCredentials (boolean) ---",
+    "EnableLogging": true
   },
 
   //LiteX SendGrid settings
   "SendGridConfig": {
-    "SendGridApiKey": "--- REPLACE WITH YOUR SendGridApiKey ---"
+    "SendGridApiKey": "--- REPLACE WITH YOUR SendGridApiKey ---",
+    "EnableLogging": true
   },
 
   //LiteX AmazonSES settings
   "AmazonSESConfig": {
     "AmazonSESAccessKey": "--- REPLACE WITH YOUR AmazonSESAccessKey ---",
     "AmazonSESSecretKey": "--- REPLACE WITH YOUR AmazonSESSecretKey ---",
-    "AmazonRegion": "--- REPLACE WITH YOUR AmazonRegion ---"
+    "AmazonRegion": "--- REPLACE WITH YOUR AmazonRegion ---",
+    "EnableLogging": true
   },
 
   //LiteX MailKit settings
@@ -57,7 +87,8 @@ Run the nuget command for installing the client as,
     "Username": "--- REPLACE WITH YOUR Username ---",
     "Password": "--- REPLACE WITH YOUR Password ---",
     "EnableSsl": false,
-    "UseDefaultCredentials": false
+    "UseDefaultCredentials": false,
+    "EnableLogging": true
   },
 
   //LiteX Mailgun settings
@@ -65,31 +96,30 @@ Run the nuget command for installing the client as,
     "ApiKey": "api:key-fakeapikey",
     "ApiBaseUri": "https://api.mailgun.net/v3/",
     "RequestUri": "fakesandbox.mailgun.org/messages",
-    "From": "postmaster@fakesandbox.mailgun.org"
+    "From": "postmaster@fakesandbox.mailgun.org",
+    "EnableLogging": true
   },
 
   //LiteX MailChimp settings
   "MailChimpConfig": {
-    "MailChimpApiKey": "--- REPLACE WITH YOUR MailChimpApiKey ---"
+    "MailChimpApiKey": "--- REPLACE WITH YOUR MailChimpApiKey ---",
+    "EnableLogging": true
   },
 
   //LiteX SendinBlue settings
   "SendinBlueConfig": {
-    "SendinBlueApiKey": "--- REPLACE WITH YOUR  ---"
+    "SendinBlueApiKey": "--- REPLACE WITH YOUR  ---",
+    "EnableLogging": true
   }
 }
 ```
 
-**Startup Configuration**
+##### 2.2 : Configure Startup Class
 ```cs
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        #region LiteX Email
-
-        // Email Message (use one of below)
-
         #region LiteX Email (SMTP)
 
         // 1. Use default configuration from appsettings.json's 'SmtpConfig'
@@ -107,6 +137,7 @@ public class Startup
             option.EnableSsl = true;
             option.UseDefaultCredentials = true;
             option.DisplayName = "";
+            option.EnableLogging = true;
         });
 
         //OR
@@ -121,7 +152,8 @@ public class Startup
             Email = "",
             EnableSsl = true,
             UseDefaultCredentials = true,
-            DisplayName = ""
+            DisplayName = "",
+            EnableLogging = true
         };
         services.AddLiteXEmail(smtpConfig);
 
@@ -137,6 +169,7 @@ public class Startup
         services.AddLiteXSendGridEmail(option =>
         {
             option.SendGridApiKey = "";
+            option.EnableLogging = true;
         });
 
         //OR
@@ -144,7 +177,8 @@ public class Startup
         // (e.g. appsettings, database, hardcoded)
         var sendGridConfig = new SendGridConfig()
         {
-            SendGridApiKey = ""
+            SendGridApiKey = "",
+            EnableLogging = true
         };
         services.AddLiteXSendGridEmail(sendGridConfig);
 
@@ -167,6 +201,7 @@ public class Startup
             option.EnableSsl = true;
             option.UseDefaultCredentials = true;
             option.DisplayName = "";
+            option.EnableLogging = true;
         });
 
         //OR
@@ -181,7 +216,8 @@ public class Startup
             Email = "",
             EnableSsl = true,
             UseDefaultCredentials = true,
-            DisplayName = ""
+            DisplayName = "",
+            EnableLogging = true
         };
         services.AddLiteXMailKitEmail(mailKitConfig);
 
@@ -199,6 +235,7 @@ public class Startup
             option.AmazonSESAccessKey = "";
             option.AmazonSESSecretKey = "";
             option.AmazonRegion = "";
+            option.EnableLogging = true;
         });
 
         //OR
@@ -207,8 +244,9 @@ public class Startup
         var amazonSESConfig = new AmazonSESConfig()
         {
             AmazonSESAccessKey = "",
-            AmazonSESSecretKey = ""
-            AmazonRegion = ""
+            AmazonSESSecretKey = "",
+            AmazonRegion = "",
+            EnableLogging = true
         };
         services.AddLiteXAmazonSESEmail(amazonSESConfig);
 
@@ -227,6 +265,7 @@ public class Startup
             option.ApiBaseUri = "";
             option.RequestUri = "";
             option.From = "";
+            option.EnableLogging = true;
         });
 
         //OR
@@ -237,37 +276,22 @@ public class Startup
             ApiKey = "",
             ApiBaseUri = "",
             RequestUri = "",
-            From = ""
+            From = "",
+            EnableLogging = true
         };
         services.AddLiteXMailgunEmail(mailgunConfig);
 
         #endregion
 
-        #region LiteX Email (MailJet) - Coming Soon
 
-        #endregion
-
-        #region LiteX Email (ElasticEmail) - Coming Soon
-
-        #endregion
-
-        #region LiteX Email (MailChimp) - Coming Soon
-
-        #endregion
-
-        #region LiteX Email (SendinBlue) - Coming Soon
-
-        #endregion
-
-        #endregion
+        // add logging (optional)
+        services.AddLiteXLogging();
     }
 }
 ```
 
+### Step 3 : Use in Controller or Business layer :memo:
 
-## Usage
-
-**Controller or Business layer**
 ```cs
 /// <summary>
 /// Customer controller
@@ -277,7 +301,7 @@ public class CustomerController : Controller
 {
     #region Fields
 
-    private readonly IEmailSender _emailSender;
+    private readonly ILiteXEmailSender _emailSender;
 
     #endregion
 
@@ -287,7 +311,7 @@ public class CustomerController : Controller
     /// Ctor
     /// </summary>
     /// <param name="emailSender"></param>
-    public CustomerController(IEmailSender emailSender)
+    public CustomerController(ILiteXEmailSender emailSender)
     {
         _emailSender = emailSender;
     }
@@ -320,20 +344,19 @@ public class CustomerController : Controller
         {
             string subject = "Welcome!",
             body = "Welcome to LiteX!",
-            fromAddress = "abc@gmail.com",
+            fromAddress = "acc.aashishpatel@gmail.com",
             fromName = "LiteX",
-            toAddress = customer.Email ?? "abc@yahoo.com",
-            toName = customer.FirstName ?? "Aashish Patel",
-            replyToAddress = "abc@gmail.com",
-            replyToName = "Reply Name";
+            toAddress = customer?.Email ?? "patelashish_90@yahoo.com",
+            toName = customer?.FirstName ?? "Aashish Patel",
+            replyToAddress = "aashish.mrcool@gmail.com",
+            replyToName = "LiteX Reply";
 
-            IEnumerable<string> bcc = new List<string>() { "abc@outlook.com" };
-            IEnumerable<string> cc = new List<string>() { "abc@gmail.com" };
+            IEnumerable<string> bcc = new List<string>() { "toaashishpatel@outlook.com" };
+            IEnumerable<string> cc = new List<string>() { "toaashishpatel@gmail.com" };
             IEnumerable<Attachment> attachments = new List<Attachment>();
 
             _emailSender.SendEmail(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc, attachments);
             //_emailSender.SendEmail(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc);
-
 
             // async
             //await _emailSender.SendEmailAsync(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc, attachments);
@@ -348,6 +371,58 @@ public class CustomerController : Controller
         }
     }
 
+    /// <summary>
+    /// Send email to customer with attachment
+    /// </summary>
+    /// <param name="customer"></param>
+    /// <param name="file">attachment</param>
+    /// <returns></returns>
+    [HttpPost]
+    [Route("send-email-to-customer-with-attachment")]
+    [AddSwaggerFileUploadButton]
+    public IActionResult SendEmailToCustomerWithAttachment(Customer customer, IFormFile file)
+    {
+        try
+        {
+            //Customer customer = null;
+
+            string subject = "Welcome!",
+            body = "Welcome to LiteX!",
+            fromAddress = "acc.aashishpatel@gmail.com",
+            fromName = "LiteX",
+            toAddress = customer?.Email ?? "patelashish_90@yahoo.com",
+            toName = customer?.FirstName ?? "Aashish Patel",
+            replyToAddress = "aashish.mrcool@gmail.com",
+            replyToName = "LiteX Reply";
+
+            var attachment = new Attachment()
+            {
+                ContentType = file?.ContentType,
+                Filename = file?.FileName,
+                Data = file?.OpenReadStream()
+            };
+
+            IEnumerable<string> bcc = new List<string>() { "toaashishpatel@outlook.com" };
+            IEnumerable<string> cc = new List<string>() { "toaashishpatel@gmail.com" };
+            List<Attachment> attachments = new List<Attachment>();
+            attachments.Add(attachment);
+
+
+            _emailSender.SendEmail(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc, attachments);
+            //_emailSender.SendEmail(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc);
+
+            // async
+            //await _emailSender.SendEmailAsync(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc, attachments);
+
+
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex);
+        }
+    }
+
     #endregion
 
     #region Utilities
@@ -356,7 +431,7 @@ public class CustomerController : Controller
     {
         IList<Customer> customers = new List<Customer>();
 
-        customers.Add(new Customer() { Id = 1, Username = "ashish", Email = "abc@outlook.com" });
+        customers.Add(new Customer() { Id = 1, Username = "ashish", Email = "toaashishpatel@outlook.com" });
 
         return customers;
     }
@@ -374,5 +449,65 @@ public class CustomerController : Controller
 }
 ```
 
-### Coming soon
-* Logging
+
+## Todo List :clipboard:
+
+#### Storage Providers
+
+- [x] Smtp
+- [x] SendGrid
+- [x] AmazonSES
+- [x] MailKit
+- [x] Mailgun
+- [] MailJet
+- [] MailChimp
+- [] SendinBlue
+- [] ElasticEmail
+
+
+#### Basic Storage API
+
+- [x] SendEmail
+
+
+
+#### Coming soon
+* Bulk Email
+
+
+---
+
+
+
+## Support :telephone:
+> Reach out to me at one of the following places!
+
+- Email :envelope: at <a href="mailto:toaashishpatel@gmail.com" target="_blank">`toaashishpatel@gmail.com`</a>
+- NuGet :package: at <a href="https://www.nuget.org/profiles/iamaashishpatel" target="_blank">`@iamaashishpatel`</a>
+
+
+
+## Authors :boy:
+
+* **Ashish Patel** - [A-Patel](https://github.com/a-patel)
+
+
+##### Connect with me
+
+| Linkedin | GitHub | Facebook | Twitter | Instagram | Tumblr | Website |
+|----------|----------|----------|----------|----------|----------|----------|
+| [![linkedin](https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-linkedin.svg)](https://www.linkedin.com/in/iamaashishpatel) | [![github](https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-github.svg)](https://github.com/a-patel) | [![facebook](https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-facebook.svg)](https://www.facebook.com/aashish.mrcool) | [![twitter](https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-twitter.svg)](https://twitter.com/aashish_mrcool) | [![instagram](https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-instagram.svg)](https://www.instagram.com/iamaashishpatel/) | [![tumblr](https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-tumblr.svg)](https://iamaashishpatel.tumblr.com/) | [![website](https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-blogger.svg)](http://aashishpatel.co.nf/) |
+| | | | | | |
+
+
+
+## Donations :dollar:
+
+[![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/iamaashishpatel)
+
+
+
+## License :lock:
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+
