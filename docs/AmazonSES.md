@@ -23,9 +23,11 @@ PM> Install-Package LiteX.Email.AmazonSES
 ##### AppSettings
 ```js
 {  
-  //LiteX SendGrid settings
-  "SendGridConfig": {
-    "SendGridApiKey": "--- REPLACE WITH YOUR SendGridApiKey ---",
+  //LiteX AmazonSES settings
+  "AmazonSESConfig": {
+    "AmazonSESAccessKey": "--- REPLACE WITH YOUR AmazonSESAccessKey ---",
+    "AmazonSESSecretKey": "--- REPLACE WITH YOUR AmazonSESSecretKey ---",
+    "AmazonRegion": "--- REPLACE WITH YOUR AmazonRegion ---",
     "EnableLogging": true
   }
 }
