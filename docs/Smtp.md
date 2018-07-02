@@ -44,26 +44,40 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        // 1. Use default configuration from appsettings.json's 'SendGridConfig'
-        services.AddLiteXSendGridEmail();
+        // 1. Use default configuration from appsettings.json's 'SmtpConfig'
+        services.AddLiteXEmail();
 
         //OR
         // 2. Load configuration settings using options.
-        services.AddLiteXSendGridEmail(option =>
+        services.AddLiteXEmail(option =>
         {
-            option.SendGridApiKey = "";
+            option.Host = "";
+            option.Username = "";
+            option.Password = "";
+            option.Port = 443;
+            option.Email = "";
+            option.EnableSsl = true;
+            option.UseDefaultCredentials = true;
+            option.DisplayName = "";
             option.EnableLogging = true;
         });
 
         //OR
         // 3. Load configuration settings on your own.
         // (e.g. appsettings, database, hardcoded)
-        var sendGridConfig = new SendGridConfig()
+        var smtpConfig = new SmtpConfig()
         {
-            SendGridApiKey = "",
+            Host = "",
+            Username = "",
+            Password = "",
+            Port = 443,
+            Email = "",
+            EnableSsl = true,
+            UseDefaultCredentials = true,
+            DisplayName = "",
             EnableLogging = true
         };
-        services.AddLiteXSendGridEmail(sendGridConfig);
+        services.AddLiteXEmail(smtpConfig);
         
         
         // add logging (optional)
