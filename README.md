@@ -32,7 +32,7 @@ This is the ASP.NET Core configuration integration package (Built-in).
 
 
 ## Features :pager:
-- Attachement
+- Attachment
 - ReplyTo
 - Cc, Bcc (multiple)
 - Async compatible
