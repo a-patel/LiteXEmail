@@ -23,9 +23,16 @@ PM> Install-Package LiteX.Email.MailKit
 ##### AppSettings
 ```js
 {  
-  //LiteX SendGrid settings
-  "SendGridConfig": {
-    "SendGridApiKey": "--- REPLACE WITH YOUR SendGridApiKey ---",
+  //LiteX MailKit settings
+  "MailKitConfig": {
+    "Email": "--- REPLACE WITH YOUR Email ---",
+    "DisplayName": "--- REPLACE WITH YOUR DisplayName ---",
+    "Host": "--- REPLACE WITH Host Host ---",
+    "Port": 587, //"--- REPLACE WITH YOUR Port (int) ---",
+    "Username": "--- REPLACE WITH YOUR Username ---",
+    "Password": "--- REPLACE WITH YOUR Password ---",
+    "EnableSsl": false,
+    "UseDefaultCredentials": false,
     "EnableLogging": true
   }
 }
