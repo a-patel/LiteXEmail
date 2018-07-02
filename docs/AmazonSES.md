@@ -39,26 +39,30 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        // 1. Use default configuration from appsettings.json's 'SendGridConfig'
-        services.AddLiteXSendGridEmail();
+        // 1. Use default configuration from appsettings.json's 'AmazonSESConfig'
+        services.AddLiteXAmazonSESEmail();
 
         //OR
         // 2. Load configuration settings using options.
-        services.AddLiteXSendGridEmail(option =>
+        services.AddLiteXAmazonSESEmail(option =>
         {
-            option.SendGridApiKey = "";
+            option.AmazonSESAccessKey = "";
+            option.AmazonSESSecretKey = "";
+            option.AmazonRegion = "";
             option.EnableLogging = true;
         });
 
         //OR
         // 3. Load configuration settings on your own.
         // (e.g. appsettings, database, hardcoded)
-        var sendGridConfig = new SendGridConfig()
+        var amazonSESConfig = new AmazonSESConfig()
         {
-            SendGridApiKey = "",
+            AmazonSESAccessKey = "",
+            AmazonSESSecretKey = "",
+            AmazonRegion = "",
             EnableLogging = true
         };
-        services.AddLiteXSendGridEmail(sendGridConfig);
+        services.AddLiteXAmazonSESEmail(amazonSESConfig);
         
         
         // add logging (optional)
