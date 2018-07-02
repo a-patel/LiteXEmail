@@ -23,9 +23,12 @@ PM> Install-Package LiteX.Email.Mailgun
 ##### AppSettings
 ```js
 {  
-  //LiteX SendGrid settings
-  "SendGridConfig": {
-    "SendGridApiKey": "--- REPLACE WITH YOUR SendGridApiKey ---",
+  //LiteX Mailgun settings
+  "MailgunConfig": {
+    "ApiKey": "api:key-fakeapikey",
+    "ApiBaseUri": "https://api.mailgun.net/v3/",
+    "RequestUri": "fakesandbox.mailgun.org/messages",
+    "From": "postmaster@fakesandbox.mailgun.org",
     "EnableLogging": true
   }
 }
