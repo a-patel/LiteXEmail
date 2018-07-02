@@ -474,10 +474,10 @@ public class CustomerController : Controller
 - [x] AmazonSES
 - [x] MailKit
 - [x] Mailgun
-- [] MailJet
-- [] MailChimp
-- [] SendinBlue
-- [] ElasticEmail
+- MailJet
+- MailChimp
+- SendinBlue
+- ElasticEmail
 
 
 #### Basic Storage API
