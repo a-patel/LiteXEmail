@@ -40,26 +40,32 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        // 1. Use default configuration from appsettings.json's 'SendGridConfig'
-        services.AddLiteXSendGridEmail();
+        // 1. Use default configuration from appsettings.json's 'MailgunConfig'
+        services.AddLiteXMailgunEmail();
 
         //OR
         // 2. Load configuration settings using options.
-        services.AddLiteXSendGridEmail(option =>
+        services.AddLiteXMailgunEmail(option =>
         {
-            option.SendGridApiKey = "";
+            option.ApiKey = "";
+            option.ApiBaseUri = "";
+            option.RequestUri = "";
+            option.From = "";
             option.EnableLogging = true;
         });
 
         //OR
         // 3. Load configuration settings on your own.
         // (e.g. appsettings, database, hardcoded)
-        var sendGridConfig = new SendGridConfig()
+        var mailgunConfig = new MailgunConfig()
         {
-            SendGridApiKey = "",
+            ApiKey = "",
+            ApiBaseUri = "",
+            RequestUri = "",
+            From = "",
             EnableLogging = true
         };
-        services.AddLiteXSendGridEmail(sendGridConfig);
+        services.AddLiteXMailgunEmail(mailgunConfig);
         
         
         // add logging (optional)
