@@ -10,7 +10,7 @@ It supports various sms providers and implements many advanced features. You can
 
 Easily migrate or switch between one to another provider with no code breaking changes.
 
-Having a default/generic implementation to wrap the SMTP, SendGrid, MailKit, Mailgun, MailChimp, AmazonSES, SendinBlue and independed on the underlying provider SDK(s).
+Having a default/generic implementation to wrap the SMTP, SendGrid, MailKit, Mailgun, MailChimp, AmazonSES, SendinBlue and independent on the underlying provider SDK(s).
 
 The Core library contains all base interfaces and tools. One should install at least one other LiteXEmail package to get email handle implementations.
 
