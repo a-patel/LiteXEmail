@@ -1,12 +1,12 @@
 # LiteXEmail
-> LiteXEmail is simple yet powerful and very high-performance sms mechanism and incorporating both synchronous and asynchronous usage with some advanced usages which can help us to handle sending email more easier!
+> LiteXEmail is simple yet powerful and very high-performance email mechanism and incorporating both synchronous and asynchronous usage with some advanced usages which can help us to handle sending email more easier!
 > Provide Email service for any type of application (.NET Core, .NET Standard).
 
 Very simple yet advanced configuration. Minimal (one line) code configuration is required.
 
 Abstract interface to implement any kind of basic email message services (e.g. SMTP, SendGrid, MailKit, Mailgun, MailChimp, AmazonSES, SendinBlue)
       
-It supports various sms providers and implements many advanced features. You can also write your own and extend it also extend existing providers.
+It supports various email providers and implements many advanced features. You can also write your own and extend it also extend existing providers.
 
 Easily migrate or switch between one to another provider with no code breaking changes.
 
