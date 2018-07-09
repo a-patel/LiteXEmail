@@ -487,6 +487,7 @@ public class CustomerController : Controller
 
 
 #### Coming soon
+* Response Result
 * Bulk Email
 
 
