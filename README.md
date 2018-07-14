@@ -347,117 +347,109 @@ public class CustomerController : Controller
     }
 
     /// <summary>
-    /// Send email to customer
+    /// Send Email 
     /// </summary>
-    /// <param name="customer"></param>
+    /// <param name="emailMessage">Email Message</param>
     /// <returns></returns>
     [HttpPost]
-    [Route("send-email-to-customer")]
-    public IActionResult SendEmailToCustomer(Customer customer)
+    [Route("send-email")]
+    public async Task<IActionResult> SendEmailToCustomer(EmailMessage emailMessage)
     {
-        try
-        {
-            string subject = "Welcome!",
-            body = "Welcome to LiteX!",
-            fromAddress = "acc.aashishpatel@gmail.com",
-            fromName = "LiteX",
-            toAddress = customer?.Email ?? "patelashish_90@yahoo.com",
-            toName = customer?.FirstName ?? "Aashish Patel",
-            replyToAddress = "aashish.mrcool@gmail.com",
-            replyToName = "LiteX Reply";
+        var message = EnsureValidEmailMessage(emailMessage);
 
-            IEnumerable<string> bcc = new List<string>() { "toaashishpatel@outlook.com" };
-            IEnumerable<string> cc = new List<string>() { "toaashishpatel@gmail.com" };
-            IEnumerable<Attachment> attachments = new List<Attachment>();
+        var subject = message.Subject;
+        var body = message.Body;
+        var fromAddress = message.FromName;
+        var fromName = message.FromName;
+        var toAddress = message.ToName;
+        var toName = message.ToName;
+        var replyToAddress = message.ReplyToAddress;
+        var replyToName = message.ReplyToName;
+        var isHtml = message.IsHtml;
+        var mailPriority = message.MailPriority;
 
-            _emailSender.SendEmail(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc, attachments);
-            //_emailSender.SendEmail(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc);
+        IEnumerable<string> bcc = new List<string>() { message.Bcc };
+        IEnumerable<string> cc = new List<string>() { message.Cc };
 
-            // async
-            //await _emailSender.SendEmailAsync(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc, attachments);
+        // async
+        var result = await _emailSender.SendEmailAsync(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc, isHtml: isHtml, priority: mailPriority);
 
+        //// sync
+        //var result = _emailSender.SendEmail(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc, isHtml: isHtml, priority: mailPriority);
+        //var result = _emailSender.SendEmail(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc, isHtml: isHtml, priority: mailPriority);
 
-            return Ok();
-        }
-        catch (Exception ex)
-        {
-
-            return BadRequest(ex);
-        }
+        return Ok(result);
     }
 
     /// <summary>
-    /// Send email to customer with attachment
+    /// Send email with attachment
     /// </summary>
-    /// <param name="customer"></param>
-    /// <param name="file">attachment</param>
+    /// <param name="emailMessage">Email Message</param>
+    /// <param name="file">Attachment</param>
     /// <returns></returns>
     [HttpPost]
-    [Route("send-email-to-customer-with-attachment")]
+    [Route("send-email-with-attachment")]
     [AddSwaggerFileUploadButton]
-    public IActionResult SendEmailToCustomerWithAttachment(Customer customer, IFormFile file)
+    public async Task<IActionResult> SendEmailToCustomerWithAttachment(EmailMessage emailMessage, IFormFile file)
     {
-        try
-        {
-            //Customer customer = null;
+        var message = EnsureValidEmailMessage(emailMessage);
 
-            string subject = "Welcome!",
-            body = "Welcome to LiteX!",
-            fromAddress = "acc.aashishpatel@gmail.com",
-            fromName = "LiteX",
-            toAddress = customer?.Email ?? "patelashish_90@yahoo.com",
-            toName = customer?.FirstName ?? "Aashish Patel",
-            replyToAddress = "aashish.mrcool@gmail.com",
-            replyToName = "LiteX Reply";
+        var subject = message.Subject;
+        var body = message.Body;
+        var fromAddress = message.FromName;
+        var fromName = message.FromName;
+        var toAddress = message.ToName;
+        var toName = message.ToName;
+        var replyToAddress = message.ReplyToAddress;
+        var replyToName = message.ReplyToName;
+        var isHtml = message.IsHtml;
+        var mailPriority = message.MailPriority;
 
-            var attachment = new Attachment()
+        IEnumerable<string> bcc = new List<string>() { message.Bcc };
+        IEnumerable<string> cc = new List<string>() { message.Cc };
+        List<Attachment> attachments = new List<Attachment>
             {
-                ContentType = file?.ContentType,
-                Filename = file?.FileName,
-                Data = file?.OpenReadStream()
+                new Attachment()
+                {
+                    ContentType = file?.ContentType,
+                    Filename = file?.FileName,
+                    Data = file?.OpenReadStream()
+                }
             };
 
-            IEnumerable<string> bcc = new List<string>() { "toaashishpatel@outlook.com" };
-            IEnumerable<string> cc = new List<string>() { "toaashishpatel@gmail.com" };
-            List<Attachment> attachments = new List<Attachment>();
-            attachments.Add(attachment);
+        // async
+        var result = await _emailSender.SendEmailAsync(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc, attachments: attachments, isHtml: isHtml, priority: mailPriority);
 
+        //// sync
+        //var result = _emailSender.SendEmail(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc, attachments: attachments, isHtml: isHtml, priority: mailPriority);
+        //var result = _emailSender.SendEmail(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc, isHtml: isHtml, priority: mailPriority);
 
-            _emailSender.SendEmail(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc, attachments);
-            //_emailSender.SendEmail(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc);
-
-            // async
-            //await _emailSender.SendEmailAsync(subject, body, fromAddress, fromName, toAddress, toName, replyToAddress, replyToName, bcc, cc, attachments);
-
-
-            return Ok();
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex);
-        }
+        return Ok(result);
     }
 
     #endregion
 
     #region Utilities
 
-    private IList<Customer> GetCustomers()
+    private EmailMessage EnsureValidEmailMessage(EmailMessage emailMessage)
     {
-        IList<Customer> customers = new List<Customer>();
+        var message = new EmailMessage()
+        {
+            Subject = emailMessage.Subject ?? "LiteX Email!",
+            Body = emailMessage.Body ?? "Welcome to LiteX Email Service!",
+            FromAddress = emailMessage.FromAddress ?? "acc.aashishpatel@gmail.com",
+            FromName = emailMessage.FromName ?? "LiteX",
+            ToAddress = emailMessage.ToAddress ?? "developer.aashishpatel@gmail.com",
+            ToName = emailMessage.ToName ?? "Aashish Patel",
+            ReplyToAddress = emailMessage.ReplyToAddress ?? "aashish.mrcool@gmail.com",
+            ReplyToName = emailMessage.ReplyToName ?? "Ashish Patel",
+            Bcc = emailMessage.FromAddress ?? "patelashish_90@yahoo.com",
+            Cc = emailMessage.FromAddress ?? "toaashishpatel@outlook.com",
+            IsHtml = emailMessage.IsHtml,
+            MailPriority = emailMessage.MailPriority,
+        };
 
-        customers.Add(new Customer() { Id = 1, Username = "ashish", Email = "toaashishpatel@outlook.com" });
-
-        return customers;
-    }
-
-    private Customer GetCustomerById(int id)
-    {
-        Customer customer = null;
-
-        customer = GetCustomers().ToList().FirstOrDefault(x => x.Id == id);
-
-        return customer;
+        return message;
     }
 
     #endregion
