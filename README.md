@@ -359,9 +359,9 @@ public class CustomerController : Controller
 
         var subject = message.Subject;
         var body = message.Body;
-        var fromAddress = message.FromName;
+        var fromAddress = message.FromAddress;
         var fromName = message.FromName;
-        var toAddress = message.ToName;
+        var toAddress = message.ToAddress;
         var toName = message.ToName;
         var replyToAddress = message.ReplyToAddress;
         var replyToName = message.ReplyToName;
@@ -396,9 +396,9 @@ public class CustomerController : Controller
 
         var subject = message.Subject;
         var body = message.Body;
-        var fromAddress = message.FromName;
+        var fromAddress = message.FromAddress;
         var fromName = message.FromName;
-        var toAddress = message.ToName;
+        var toAddress = message.ToAddress;
         var toName = message.ToName;
         var replyToAddress = message.ReplyToAddress;
         var replyToName = message.ReplyToName;
@@ -448,6 +448,8 @@ public class CustomerController : Controller
             IsHtml = emailMessage.IsHtml,
             MailPriority = emailMessage.MailPriority,
         };
+
+        message.Body = $"{message.Body} - Provider: {_emailSender.EmailProviderType.ToString()}";
 
         return message;
     }
