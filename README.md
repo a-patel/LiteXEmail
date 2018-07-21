@@ -18,7 +18,6 @@ The Core library contains all base interfaces and tools. One should install at l
 This is the ASP.NET Core configuration integration package (Built-in).
 
 
-
 ## Email Providers :books:
 - [Smtp](docs/Smtp.md)
 - [SendGrid](docs/SendGrid.md)
