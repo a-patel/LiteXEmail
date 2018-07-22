@@ -1,6 +1,8 @@
 # LiteX Email SendGrid
 > LiteX.Email.SendGrid is a email message library which is based on LiteX.Email.Core and SendGrid.
 
+Allow sending emails via SendGrid.
+
 This client library enables working with the SendGrid API to sending email messages.
 
 Small library to abstract sending email messages to SendGrid API. Quick setup for SendGrid API and very simple wrapper for the SendGrid API to email messages.
