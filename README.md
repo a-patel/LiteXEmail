@@ -3,7 +3,7 @@
 
 Provide email message service for ASP.NET Core (2.0 and later) applications.
 
-Small library to abstract email message functionalities. Quick setup for any email message provider and very simple wrapper for the widely used email providers. LiteX Email uses the least common denominator of functionality between the supported providers to send email messages solution. Abstract interface to implement any kind of basic email message services. Having a default/generic implementation to wrap the SMTP, SendGrid, MailKit, Mailgun, MailChimp, AmazonSES, SendinBlue. An email message abstraction.
+Small library to abstract email message functionalities. Quick setup for any email message provider and very simple wrapper for the widely used email providers. LiteXEmail uses the least common denominator of functionality between the supported providers to send email messages solution. Abstract interface to implement any kind of basic email message services. Having a default/generic implementation to wrap the SMTP, SendGrid, MailKit, Mailgun, MailChimp, AmazonSES, SendinBlue. An email message abstraction.
 
 Very simple configuration in advanced ways. Purpose of this package is to bring a new level of ease to the developers who deal with different email message provider integration with their system and implements many advanced features. You can also write your own and extend it also extend existing providers. Easily migrate or switch between one to another provider with no code breaking changes.
 
