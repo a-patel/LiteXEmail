@@ -22,7 +22,7 @@ PM> Install-Package LiteX.Email.SendGrid
 
 ##### AppSettings
 ```js
-{  
+{
   //LiteX SendGrid settings
   "SendGridConfig": {
     "SendGridApiKey": "--- REPLACE WITH YOUR SendGridApiKey ---",
