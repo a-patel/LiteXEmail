@@ -1,5 +1,5 @@
 # LiteXEmail
-> LiteXEmail is simple yet powerful and very high-performance email mechanism and incorporating both synchronous and asynchronous usage with some advanced usages which can help us to handle sending email more easier!
+> LiteXEmail is simple yet powerful and very high-performance email message sending mechanism and incorporating both synchronous and asynchronous usage with some advanced usages which can help us to handle sending email more easier!
 
 Provide Storage service for ASP.NET Core (2.0 and later) applications.
 
