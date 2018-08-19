@@ -10,7 +10,6 @@ Small library to abstract sending email messages to SendGrid API. Quick setup fo
 Very simple configuration in advanced ways. Purpose of this package is to bring a new level of ease to the developers who deal with SendGrid API integration with their system.
 
 
-
 ## Basic Usage
 
 ### Install the package
