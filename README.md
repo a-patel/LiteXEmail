@@ -10,7 +10,6 @@ Very simple configuration in advanced ways. Purpose of this package is to bring 
 LiteXEmail is an interface to unify the programming model for various email providers. The Core library contains all base interfaces and tools. One should install at least one other LiteXEmail package to get email message implementation.
 
 
-
 ## Email Providers :books:
 - [Smtp](docs/Smtp.md)
 - [SendGrid](docs/SendGrid.md)
