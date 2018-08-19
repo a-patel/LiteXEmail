@@ -9,8 +9,8 @@ Small library for manage email with MailKit. A quick setup for MailKit.
 
 Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with MailKit integration with your system.
 
-## Basic Usage
 
+## Basic Usage
 
 ### Install the package
 
