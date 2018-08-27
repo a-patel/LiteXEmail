@@ -22,7 +22,6 @@ LiteXEmail is an interface to unify the programming model for various email prov
 - [ElasticEmail](docs/ElasticEmail.md) - coming soon
 
 
-
 ## Features :pager:
 - Attachment
 - ReplyTo
@@ -33,9 +32,7 @@ LiteXEmail is an interface to unify the programming model for various email prov
 - Leverages a provider model on top of ILiteXEmailSender under the hood and can be extended with your own implementation
 
 
-
 ## Basic Usage :page_facing_up:
-
 
 ### Step 1 : Install the package :package:
 
