@@ -10,6 +10,7 @@ Small library for manage email with Mailgun. A quick setup for Mailgun.
 Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with Mailgun integration with your system.
 
 
+
 ## Basic Usage
 
 ### Install the package
