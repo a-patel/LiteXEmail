@@ -10,6 +10,7 @@ Small library for manage email with AmazonSES. A quick setup for AmazonSES.
 Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with AmazonSES integration with your system.
 
 
+
 ## Basic Usage
 
 ### Install the package
