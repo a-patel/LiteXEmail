@@ -26,7 +26,6 @@ LiteXEmail is an interface to unify the programming model for various email prov
 - Attachment
 - ReplyTo
 - Cc, Bcc (multiple)
-- Voice call (beta)
 - Async compatible
 - Thread safe, concurrency ready
 - Interface based API to support the test driven development and dependency injection
