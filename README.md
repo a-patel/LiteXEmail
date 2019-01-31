@@ -470,8 +470,10 @@ public class CustomerController : Controller
 
 
 #### Coming soon
-* Response Result
-* Bulk Email
+- Obsolete sync methods
+- Multiple provider support (using provider factory)
+- Response Result
+- Bulk Email
 
 
 ---
