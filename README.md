@@ -28,6 +28,8 @@ LiteXEmail is an interface to unify the programming model for various email prov
 - Cc, Bcc (multiple)
 - Async compatible
 - Thread safe, concurrency ready
+- Obsolete sync methods
+- Multiple provider support (using provider factory)
 - Interface based API to support the test driven development and dependency injection
 - Leverages a provider model on top of ILiteXEmailSender under the hood and can be extended with your own implementation
 
@@ -470,8 +472,9 @@ public class CustomerController : Controller
 
 
 #### Coming soon
-- Obsolete sync methods
-- Multiple provider support (using provider factory)
+- .NET Standard 2.1 support
+- .NET 5.0 support
+- Remove sync methods
 - Response Result
 - Bulk Email
 
