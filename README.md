@@ -1,5 +1,8 @@
 # LiteXEmail
+
 > LiteXEmail is simple yet powerful and very high-performance email message sending mechanism and incorporating both synchronous and asynchronous usage with some advanced usages which can help us to handle sending email more easier!
+
+
 
 Provide email message service for ASP.NET Core (2.0 and later) applications.
 
@@ -10,19 +13,25 @@ Very simple configuration in advanced ways. Purpose of this package is to bring 
 LiteXEmail is an interface to unify the programming model for various email providers. The Core library contains all base interfaces and tools. One should install at least one other LiteXEmail package to get email message implementation.
 
 
+
+
+
 ## Email Providers :books:
-- [Smtp](docs/Smtp.md)
-- [SendGrid](docs/SendGrid.md)
-- [AmazonSES](docs/AmazonSES.md)
-- [MailKit](docs/MailKit.md)
-- [Mailgun](docs/Mailgun.md)
+
+- [Smtp](docs/Smtp.md) [![](https://img.shields.io/nuget/dt/LiteX.Email.svg)](https://www.nuget.org/packages/LiteX.Email/) [![](https://img.shields.io/nuget/v/LiteX.Email.svg)](https://www.nuget.org/packages/LiteX.Email/)
+- [SendGrid](docs/SendGrid.md) [![](https://img.shields.io/nuget/dt/LiteX.Email.SendGrid.svg)](https://www.nuget.org/packages/LiteX.Email.SendGrid/) [![](https://img.shields.io/nuget/v/LiteX.Email.SendGrid.svg)](https://www.nuget.org/packages/LiteX.Email.SendGrid/)
+- [AmazonSES](docs/AmazonSES.md) [![](https://img.shields.io/nuget/dt/LiteX.Email.AmazonSES.svg)](https://www.nuget.org/packages/LiteX.Email.AmazonSES/) [![](https://img.shields.io/nuget/v/LiteX.Email.AmazonSES.svg)](https://www.nuget.org/packages/LiteX.Email.AmazonSES/)
+- [MailKit](docs/MailKit.md) [![](https://img.shields.io/nuget/dt/LiteX.Email.MailKit.svg)](https://www.nuget.org/packages/LiteX.Email.MailKit/) [![](https://img.shields.io/nuget/v/LiteX.Email.MailKit.svg)](https://www.nuget.org/packages/LiteX.Email.MailKit/)
+- [Mailgun](docs/Mailgun.md) [![](https://img.shields.io/nuget/dt/LiteX.Email.Mailgun.svg)](https://www.nuget.org/packages/LiteX.Email.Mailgun/) [![](https://img.shields.io/nuget/v/LiteX.Email.Mailgun.svg)](https://www.nuget.org/packages/LiteX.Email.Mailgun/)
 - [MailJet](docs/MailJet.md) - coming soon
 - [MailChimp](docs/MailChimp.md) - coming soon
 - [SendinBlue](docs/SendinBlue.md) - coming soon
 - [ElasticEmail](docs/ElasticEmail.md) - coming soon
 
 
+
 ## Features :pager:
+
 - Attachment
 - ReplyTo
 - Cc, Bcc (multiple)
@@ -32,6 +41,7 @@ LiteXEmail is an interface to unify the programming model for various email prov
 - Multiple provider support (using provider factory)
 - Interface based API to support the test driven development and dependency injection
 - Leverages a provider model on top of ILiteXEmailSender under the hood and can be extended with your own implementation
+
 
 
 ## Basic Usage :page_facing_up:
@@ -50,11 +60,14 @@ PM> Install-Package LiteX.Email.Mailgun
 ```
 
 
-### Step 2 : Configuration 🔨 
+### Step 2 : Configuration 🔨
+
 > Different types of email provider have their own way to config.
 > Here are samples that show you how to config.
 
-##### 2.1 : AppSettings 
+
+##### 2.1 : AppSettings
+
 ```js
 {
   //LiteX Smtp settings
@@ -121,6 +134,7 @@ PM> Install-Package LiteX.Email.Mailgun
 ```
 
 ##### 2.2 : Configure Startup Class
+
 ```cs
 public class Startup
 {
@@ -296,6 +310,7 @@ public class Startup
 }
 ```
 
+
 ### Step 3 : Use in Controller or Business layer :memo:
 
 ```cs
@@ -470,8 +485,8 @@ public class CustomerController : Controller
 - [x] SendEmail
 
 
-
 #### Coming soon
+
 - .NET Standard 2.1 support
 - .NET 5.0 support
 - Remove sync methods
@@ -479,19 +494,64 @@ public class CustomerController : Controller
 - Bulk Email
 
 
+
+
+
 ---
 
 
 
+
+# Coming soon
+
+
+
+
+## [LiteXAuthentication](https://github.com/a-patel/LiteXAuthentication)
+LiteX Authentication: ApiKey, Basic Authentication
+
+
+
+## [LiteXMessageQueue](https://github.com/a-patel/LiteXMessageQueue)
+Abstract interface to implement any kind of message queue or service bus services (e.g. Azure ServiceBus, Azure Storage Queue, AmazonSQS, RabbitMQ, Google Cloud Queue, Redis Queue).
+
+
+
+## [LiteXPayment](https://github.com/a-patel/LiteXPayment)
+LiteXPayment wapper around PayPal, Stripe, BrainTree etc.
+
+
+
+## [LiteXTagHelpers](https://github.com/a-patel/LiteXTagHelpers)
+LiteX TagHelpers for Bootstrap 4 and other useful TagHelpers
+
+
+
+## [LiteXMvcFilters](https://github.com/a-patel/LiteXMvcFilters)
+ASP.NET Core Mvc and Api filters
+
+
+
+
+---
+
+
+
+
+
 ## Give a Star! :star:
+
 Feel free to request an issue on github if you find bugs or request a new feature. Your valuable feedback is much appreciated to better improve this project. If you find this useful, please give it a star to show your support for this project.
 
 
+
 ## Support :telephone:
+
 > Reach out to me at one of the following places!
 
 - Email :envelope: at <a href="mailto:toaashishpatel@gmail.com" target="_blank">`toaashishpatel@gmail.com`</a>
 - NuGet :package: at <a href="https://www.nuget.org/profiles/iamaashishpatel" target="_blank">`@iamaashishpatel`</a>
+
 
 
 ## Author :boy:
@@ -503,17 +563,20 @@ Feel free to request an issue on github if you find bugs or request a new featur
 
 | Linkedin | Website | Medium | NuGet | GitHub | Microsoft | Facebook | Twitter | Instagram | Tumblr |
 |----------|----------|----------|----------|----------|----------|----------|----------|----------|----------|
-| [![linkedin](https://img.icons8.com/ios-filled/96/000000/linkedin.png)](https://www.linkedin.com/in/iamaashishpatel) | [![website](https://img.icons8.com/wired/96/000000/domain.png)](https://aashishpatel.netlify.com/) | [![medium](https://img.icons8.com/ios-filled/96/000000/medium-monogram.png)](https://medium.com/@iamaashishpatel) | [![nuget](https://img.icons8.com/windows/96/000000/nuget.png)](https://nuget.org/profiles/iamaashishpatel) | [![github](https://img.icons8.com/ios-glyphs/96/000000/github.png)](https://github.com/a-patel) | [![microsoft](https://img.icons8.com/ios-filled/90/000000/microsoft.png)](https://docs.microsoft.com/en-us/users/iamaashishpatel) | [![facebook](https://img.icons8.com/ios-filled/90/000000/facebook.png)](https://www.facebook.com/aashish.mrcool) | [![twitter](https://img.icons8.com/ios-filled/96/000000/twitter.png)](https://twitter.com/aashish_mrcool) | [![instagram](https://img.icons8.com/ios-filled/90/000000/instagram-new.png)](https://www.instagram.com/iamaashishpatel/) | [![tumblr](https://img.icons8.com/ios-filled/96/000000/tumblr--v1.png)](https://iamaashishpatel.tumblr.com/) |
+| [![linkedin](https://img.icons8.com/ios-filled/96/000000/linkedin.png)](https://www.linkedin.com/in/iamaashishpatel) | [![website](https://img.icons8.com/wired/96/000000/domain.png)](https://aashishpatel.netlify.app/) | [![medium](https://img.icons8.com/ios-filled/96/000000/medium-monogram.png)](https://medium.com/@iamaashishpatel) | [![nuget](https://img.icons8.com/windows/96/000000/nuget.png)](https://nuget.org/profiles/iamaashishpatel) | [![github](https://img.icons8.com/ios-glyphs/96/000000/github.png)](https://github.com/a-patel) | [![microsoft](https://img.icons8.com/ios-filled/90/000000/microsoft.png)](https://docs.microsoft.com/en-us/users/iamaashishpatel) | [![facebook](https://img.icons8.com/ios-filled/90/000000/facebook.png)](https://www.facebook.com/aashish.mrcool) | [![twitter](https://img.icons8.com/ios-filled/96/000000/twitter.png)](https://twitter.com/aashish_mrcool) | [![instagram](https://img.icons8.com/ios-filled/90/000000/instagram-new.png)](https://www.instagram.com/iamaashishpatel/) | [![tumblr](https://img.icons8.com/ios-filled/96/000000/tumblr--v1.png)](https://iamaashishpatel.tumblr.com/) |
+
 
 
 ## Donate :dollar:
+
 If you find this project useful — or just feeling generous, consider buying me a beer or a coffee. Cheers! :beers: :coffee:
+
 | PayPal | BMC | Patreon |
 | ------------- | ------------- | ------------- |
 | [![PayPal](https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_pp_142x27.png)](https://www.paypal.me/iamaashishpatel) | [![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/iamaashishpatel) | [![Patreon](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/iamaashishpatel) |
 
 
+
 ## License :lock:
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
-
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
