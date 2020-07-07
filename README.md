@@ -502,42 +502,6 @@ public class CustomerController : Controller
 
 
 
-# Coming soon
-
-
-
-
-## [LiteXAuthentication](https://github.com/a-patel/LiteXAuthentication)
-LiteX Authentication: ApiKey, Basic Authentication
-
-
-
-## [LiteXMessageQueue](https://github.com/a-patel/LiteXMessageQueue)
-Abstract interface to implement any kind of message queue or service bus services (e.g. Azure ServiceBus, Azure Storage Queue, AmazonSQS, RabbitMQ, Google Cloud Queue, Redis Queue).
-
-
-
-## [LiteXPayment](https://github.com/a-patel/LiteXPayment)
-LiteXPayment wapper around PayPal, Stripe, BrainTree etc.
-
-
-
-## [LiteXTagHelpers](https://github.com/a-patel/LiteXTagHelpers)
-LiteX TagHelpers for Bootstrap 4 and other useful TagHelpers
-
-
-
-## [LiteXMvcFilters](https://github.com/a-patel/LiteXMvcFilters)
-ASP.NET Core Mvc and Api filters
-
-
-
-
----
-
-
-
-
 
 ## Give a Star! :star:
 
