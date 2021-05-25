@@ -143,11 +143,11 @@ public class Startup
         #region LiteX Email (SMTP)
 
         // 1. Use default configuration from appsettings.json's 'SmtpConfig'
-        services.AddLiteXEmail();
+        services.AddLiteXSmtpEmail();
 
         //OR
         // 2. Load configuration settings using options.
-        services.AddLiteXEmail(option =>
+        services.AddLiteXSmtpEmail(option =>
         {
             option.Host = "";
             option.Username = "";
@@ -175,7 +175,7 @@ public class Startup
             DisplayName = "",
             EnableLogging = true
         };
-        services.AddLiteXEmail(smtpConfig);
+        services.AddLiteXSmtpEmail(smtpConfig);
 
         #endregion
 
